@@ -1,0 +1,33 @@
+body
+{
+    width: 250px;
+    height: 500px;
+    background-color: #2d3436;
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+}
+.container {
+    margin: 15px;
+    padding: 0 10px;
+    flex: 1;
+    background-color: #636e72;
+    overflow-y: auto;
+}
+.btnRunScript
+{
+    width: 100%;
+    height: 50px;
+    background-color: #0984e3;
+    margin: 10px 0 0 0;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+.btnRunScript:hover
+{
+    background-color: #74b9ff;
+}
