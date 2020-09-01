@@ -1,13 +1,31 @@
 window.onload = async ()=>
 {
     await loadScripts();
+    showBtn();
+}
+var files = {};
+function showBtn()
+{
+    let container = document.querySelector(".container");
+    for(let script in files){
+        let btn = document.createElement("button");
+        btn.classList.add("btnRunScript");
+        btn.innerText = script;
+        btn.addEventListener("click",function()
+        {
+            exe(script);
+        })
+        container.appendChild(btn);
+    }
 }
 async function loadScripts()
 {
-    console.log(("a"));
     let url = "https://api.github.com/repos/koder10001/myScript/contents?ref=master";
-    let json = JSON.parse(await request(url));
-    console.log(json);
+    let res = JSON.parse(await request(url));
+    for ( let file of res )
+    {
+        files[file.name] = file.download_url;
+    }
 }
 function request(url){
     return new Promise((resolve)=>{
@@ -16,11 +34,16 @@ function request(url){
         {
             if (this.readyState == 4 && this.status == 200)
             {
-                console.log(xhr.response);
                 resolve(xhr.response);
             }
         }
         xhr.open("GET",url,true);
         xhr.send();
     })
+}
+
+async function exe(name)
+{
+    let js = await request(files[name]);
+    chrome.tabs.executeScript({code: js});
 }
