@@ -1,7 +1,7 @@
 {
-    "name": "Getting Started Example",
+    "name": "My Script",
     "version": "1.0",
-    "description": "Build an Extension!",
+    "description": "run my script everywhere",
     "permissions": ["activeTab"],
     "background": {
         "scripts": ["background.js"],

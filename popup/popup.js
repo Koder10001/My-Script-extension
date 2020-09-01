@@ -1,21 +1,46 @@
 window.onload = async ()=>
 {
     await loadScripts();
-    showBtn();
+    showBtn(false);
 }
+var adult = 0;
+var reset;
+document.body.onkeyup = (e)=>{
+    if(e.which == 192){
+        adult++;
+    }
+    if(adult == 7){
+        showBtn(true);
+    }
+    reset = setTimeout(()=>{adult = 0}, 2000);
+}
+
 var files = {};
-function showBtn()
+function showBtn(adult)
 {
     let container = document.querySelector(".container");
+    container.innerHTML = "";
     for(let script in files){
-        let btn = document.createElement("button");
-        btn.classList.add("btnRunScript");
-        btn.innerText = script;
-        btn.addEventListener("click",function()
-        {
-            exe(script);
-        })
-        container.appendChild(btn);
+        if(adult && script.startsWith("[")){
+            let btn = document.createElement("button");
+            btn.classList.add("btnRunScript");
+            btn.innerText = script;
+            btn.addEventListener("click",function()
+            {
+                exe(script);
+            })
+            container.appendChild(btn);
+        }
+        else if(!adult && script.startsWith("[") == false){
+            let btn = document.createElement("button");
+            btn.classList.add("btnRunScript");
+            btn.innerText = script;
+            btn.addEventListener("click",function()
+            {
+                exe(script);
+            })
+            container.appendChild(btn);
+        }
     }
 }
 async function loadScripts()
