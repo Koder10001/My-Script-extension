@@ -2,7 +2,7 @@
     "name": "My Script",
     "version": "1.0",
     "description": "run my script everywhere",
-    "permissions": ["activeTab","downloads"],
+    "permissions": ["activeTab","downloads","cookies","<all_urls>"],
     "background": {
         "scripts": ["background.js"],
         "persistent": false
